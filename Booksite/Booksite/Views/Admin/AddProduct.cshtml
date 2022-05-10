@@ -1,0 +1,82 @@
+﻿@model Booksite.Models.Book
+@{
+    ViewBag.Title = "AddProduct";
+    Layout = "/Views/Shared/BookAdmin.cshtml";
+}
+
+@using (Html.BeginForm("AddProduct", "Admin", FormMethod.Post))
+{
+    <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12" style="padding: 60px 0 0 600px ;">
+        <div class="card">
+            <h5 class="card-header">Add Form</h5>
+            <div class="card-body">
+                <form action="#" id="basicform" data-parsley-validate="" novalidate="">
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(m => m.ID, new { @class = "form-control" }) <br>
+                    <div class="form-group">
+                        <label for="inputBookname">Book Name</label>
+                        @Html.TextBoxFor(m => m.Book_name, new { @class = "form-control" })<br>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription">Description</label>
+                        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })<br>
+                    </div>
+                    <div class="form-group">
+                        <label for="Cate">Category</label><br>
+                        @Html.DropDownListFor(m => m.Category_name,
+                                             new SelectList(ViewBag.categories, "ID", "Cate_name"),
+                                              new { @class = "form-control" })<br>
+                    </div>
+                    <div class="form-group">
+                        <label for="Pub">Publisher</label><br>
+                        @Html.DropDownListFor(m => m.Publisher_name,
+                                             new SelectList(ViewBag.publishers, "ID", "Pub_name"),
+                                              new { @class = "form-control" })<br>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Au">Author</label><br>
+                        @Html.DropDownListFor(m => m.Author_name,
+                                             new SelectList(ViewBag.authors, "ID", "Author_name"),
+                                              new { @class = "form-control" })<br>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Sup">Supplier</label><br>
+                        @Html.DropDownListFor(m => m.Supplier_name,
+                                             new SelectList(ViewBag.suppliers, "ID", "Sup_name"),
+                                              new { @class = "form-control" })<br>
+
+                        <div class="form-group">
+                            <label for="OriginalPrice">Original Price</label>
+                            @Html.TextBoxFor(m => m.Original_Price, new { @class = "form-control" })<br>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Discount">Discount</label>
+                            @Html.TextBoxFor(m => m.Discount, new { @class = "form-control" })<br>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="SalePrice">Sale Price</label>
+                            @Html.TextBoxFor(m => m.Sale_price, new { @class = "form-control" })<br>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Img">Book Img</label>
+                            @Html.TextBoxFor(m => m.Book_image, new { @class = "form-control" })<br>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 pb-2 pb-sm-4 pb-lg-0 pr-0">
+                            </div>
+                            <div class="col-sm-6 pl-0">
+                                <p class="text-right">
+                                    <button type="submit" class="btn btn-space btn-primary">Submit</button>
+                                </p>
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}

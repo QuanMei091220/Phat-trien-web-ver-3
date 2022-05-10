@@ -1,0 +1,16 @@
+﻿@model Booksite.Models.Author
+@{
+    ViewBag.Title = "ProductsDetail";
+    Layout = "/Views/Shared/BookAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12" style="padding: 60px 0 0 300px ;">
+        <h2>Author Detail - @ViewBag.authorid</h2>
+        <ul class="list-unstyled arrow">
+
+            <li>@Model.Author_name</li>
+
+        </ul>
+    </div>
+</div>

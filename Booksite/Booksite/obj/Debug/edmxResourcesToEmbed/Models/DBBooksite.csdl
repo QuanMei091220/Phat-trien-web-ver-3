@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Permission" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Carts" Relationship="Self.fk_Account_id_cart" FromRole="Account" ToRole="Cart" />
+    <NavigationProperty Name="Check_out" Relationship="Self.fk_Checkout_Account" FromRole="Account" ToRole="Check_out" />
+  </EntityType>
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Author_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Books" Relationship="Self.fk_Auth_name" FromRole="Author" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Book_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Book_image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Category_name" Type="Int32" />
+    <Property Name="Publisher_name" Type="Int32" />
+    <Property Name="Author_name" Type="Int32" />
+    <Property Name="Supplier_name" Type="Int32" />
+    <Property Name="Original_Price" Type="Int32" />
+    <Property Name="Discount" Type="Int32" />
+    <Property Name="Sale_price" Type="Int32" />
+    <Property Name="Rating" Type="Int32" />
+    <NavigationProperty Name="Author" Relationship="Self.fk_Auth_name" FromRole="Book" ToRole="Author" />
+    <NavigationProperty Name="Category" Relationship="Self.fk_cate_name" FromRole="Book" ToRole="Category" />
+    <NavigationProperty Name="Carts" Relationship="Self.fk_Product" FromRole="Book" ToRole="Cart" />
+    <NavigationProperty Name="Publisher" Relationship="Self.fk_pub_name" FromRole="Book" ToRole="Publisher" />
+    <NavigationProperty Name="Supplier" Relationship="Self.fk_sup_name" FromRole="Book" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Account_name" Type="Int32" Nullable="false" />
+    <Property Name="Book" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Total" Type="Int32" />
+    <Property Name="SessionID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="Self.fk_Account_id_cart" FromRole="Cart" ToRole="Account" />
+    <NavigationProperty Name="Book1" Relationship="Self.fk_Product" FromRole="Cart" ToRole="Book" />
+    <NavigationProperty Name="Check_out" Relationship="Self.fk_Checkout_all" FromRole="Cart" ToRole="Check_out" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cate_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Supper_Id" Type="Int32" />
+    <NavigationProperty Name="Books" Relationship="Self.fk_cate_name" FromRole="Category" ToRole="Book" />
+    <NavigationProperty Name="Category1" Relationship="Self.FK_Category_Category" FromRole="Category" ToRole="Category1" />
+    <NavigationProperty Name="Category2" Relationship="Self.FK_Category_Category" FromRole="Category1" ToRole="Category" />
+  </EntityType>
+  <EntityType Name="Check_out">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Account_name" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="Int32" />
+    <Property Name="Cart_total" Type="Int32" />
+    <Property Name="Voucher" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Shipping_fee" Type="Int32" />
+    <Property Name="Payment" Type="Int32" />
+    <Property Name="Total" Type="Int32" />
+    <NavigationProperty Name="Account" Relationship="Self.fk_Checkout_Account" FromRole="Check_out" ToRole="Account" />
+    <NavigationProperty Name="Cart" Relationship="Self.fk_Checkout_all" FromRole="Check_out" ToRole="Cart" />
+    <NavigationProperty Name="Payment_Method" Relationship="Self.fk_Checkout_payment" FromRole="Check_out" ToRole="Payment_Method" />
+    <NavigationProperty Name="Shipping_fee1" Relationship="Self.fk_Checkout_ship" FromRole="Check_out" ToRole="Shipping_fee" />
+  </EntityType>
+  <EntityType Name="Payment_Method">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Method_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Check_out" Relationship="Self.fk_Checkout_payment" FromRole="Payment_Method" ToRole="Check_out" />
+  </EntityType>
+  <EntityType Name="Publisher">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Pub_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Books" Relationship="Self.fk_pub_name" FromRole="Publisher" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Shipping_fee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Int32" />
+    <Property Name="SupperID" Type="Int32" />
+    <NavigationProperty Name="Check_out" Relationship="Self.fk_Checkout_ship" FromRole="Shipping_fee" ToRole="Check_out" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Sup_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Books" Relationship="Self.fk_sup_name" FromRole="Supplier" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="fk_Account_id_cart">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="Account_name" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Checkout_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Check_out" Type="Self.Check_out" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Check_out">
+        <PropertyRef Name="Account_name" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Auth_name">
+    <End Role="Author" Type="Self.Author" Multiplicity="0..1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="Author_name" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_cate_name">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="Category_name" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Product">
+    <End Role="Book" Type="Self.Book" Multiplicity="1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="Book" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_pub_name">
+    <End Role="Publisher" Type="Self.Publisher" Multiplicity="0..1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Publisher">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="Publisher_name" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_sup_name">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="Supplier_name" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Checkout_all">
+    <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+    <End Role="Check_out" Type="Self.Check_out" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Check_out">
+        <PropertyRef Name="Cart_total" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Category_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Category1" Type="Self.Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Category1">
+        <PropertyRef Name="Supper_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Checkout_payment">
+    <End Role="Payment_Method" Type="Self.Payment_Method" Multiplicity="0..1" />
+    <End Role="Check_out" Type="Self.Check_out" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment_Method">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Check_out">
+        <PropertyRef Name="Payment" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Checkout_ship">
+    <End Role="Shipping_fee" Type="Self.Shipping_fee" Multiplicity="0..1" />
+    <End Role="Check_out" Type="Self.Check_out" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shipping_fee">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Check_out">
+        <PropertyRef Name="Shipping_fee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BooksiteEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="Authors" EntityType="Self.Author" />
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="Carts" EntityType="Self.Cart" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Check_out" EntityType="Self.Check_out" />
+    <EntitySet Name="Payment_Method" EntityType="Self.Payment_Method" />
+    <EntitySet Name="Publishers" EntityType="Self.Publisher" />
+    <EntitySet Name="Shipping_fee" EntityType="Self.Shipping_fee" />
+    <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="fk_Account_id_cart" Association="Self.fk_Account_id_cart">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Checkout_Account" Association="Self.fk_Checkout_Account">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Check_out" EntitySet="Check_out" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Auth_name" Association="Self.fk_Auth_name">
+      <End Role="Author" EntitySet="Authors" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cate_name" Association="Self.fk_cate_name">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Product" Association="Self.fk_Product">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_pub_name" Association="Self.fk_pub_name">
+      <End Role="Publisher" EntitySet="Publishers" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="fk_sup_name" Association="Self.fk_sup_name">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Checkout_all" Association="Self.fk_Checkout_all">
+      <End Role="Cart" EntitySet="Carts" />
+      <End Role="Check_out" EntitySet="Check_out" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Category_Category" Association="Self.FK_Category_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Category1" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Checkout_payment" Association="Self.fk_Checkout_payment">
+      <End Role="Payment_Method" EntitySet="Payment_Method" />
+      <End Role="Check_out" EntitySet="Check_out" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Checkout_ship" Association="Self.fk_Checkout_ship">
+      <End Role="Shipping_fee" EntitySet="Shipping_fee" />
+      <End Role="Check_out" EntitySet="Check_out" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

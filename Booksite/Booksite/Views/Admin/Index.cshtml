@@ -1,0 +1,103 @@
+﻿@model List<Booksite.Models.Book>
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "/Views/Shared/BookAdmin.cshtml";
+}
+
+
+<div class="dashboard-wrapper">
+    <div class="dashboard-ecommerce">
+        <div class="container-fluid dashboard-content ">
+            <!-- ============================================================== -->
+            <!-- pageheader  -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="page-header">
+                        <h2 class="pageheader-title">Booksite Dashboard </h2>
+                        <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                        <div class="page-breadcrumb">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    @Html.ActionLink("Add New", "AddProduct")
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- end pageheader  -->
+            <!-- ============================================================== -->
+          
+            <div class="ecommerce-widget">
+                <div class="row">
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- recent orders  -->
+                    <!-- ============================================================== -->
+                    <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
+                        <div class="card">
+                   
+                            <h5 class="card-header">Product List</h5>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="bg-light">
+                                            <tr class="border-0">
+                                                <th class="border-0">ID</th>
+                                                <th class="border-0">Book Img</th>
+                                                <th class="border-0">Book Name</th>
+                                                <th class="border-0">Description</th>
+                                                <th class="border-0">Category</th>
+                                                <th class="border-0">Author</th>
+                                                <th class="border-0">Supplier</th>
+                                                <th class="border-0">Original Price</th>
+                                                <th class="border-0">Discount</th>
+                                                <th class="border-0">Sale Price</th>
+                                                <th class="border-0">Editor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                            <tr>
+                                                <td>@item.ID</td>
+                                                <td>
+                                                    <div class="m-r-10"><img src="~/Content/images/book/@item.Book_image" alt="user" class="rounded" width="45"></div>
+                                                </td>
+                                                <td>@item.Book_name</td>
+                                                <td>@item.Description</td>
+                                                <td>@item.Category_name</td>
+                                                <td>@item.Author_name</td>
+                                                <td>@item.Supplier_name</td>
+                                                <td>@item.Original_Price</td>
+                                                <td>@item.Discount</td>
+                                                <td>@item.Sale_price</td>
+                                                <td>
+                                                    <a href="~/Admin/ProductsDetail/@item.ID">Details</a> |
+                                                    <a href="~/Admin/EditProduct/@item.ID">Edit</a> |
+                                                    <a href="~/Admin/DeleteProduct/@item.ID">Delete</a> |
+                                                </td>
+                                            </tr>
+
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- end recent orders  -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- customer acquistion  -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- end customer acquistion  -->
+                    <!-- ============================================================== -->
+                </div>
+            </div>
+        </div>
+    </div>

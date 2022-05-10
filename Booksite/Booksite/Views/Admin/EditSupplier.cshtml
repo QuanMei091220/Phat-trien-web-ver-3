@@ -1,0 +1,33 @@
+﻿@model Booksite.Models.Supplier
+@{
+    ViewBag.Title = "AddProduct";
+    Layout = "/Views/Shared/BookAdmin.cshtml";
+}
+
+@using (Html.BeginForm("UpdateSupplier", "Admin", FormMethod.Post))
+{
+    <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12" style="padding: 60px 0 0 600px ;">
+        <div class="card">
+            <h5 class="card-header">Add Form</h5>
+            <div class="card-body">
+                <form action="#" id="basicform" data-parsley-validate="" novalidate="">
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(m => m.ID, new { @class = "form-control" }) <br>
+                    <div class="form-group">
+                        <label for="inputauthorname">Sup Name</label>
+                        @Html.TextBoxFor(m => m.Sup_name, new { @class = "form-control" })<br>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 pb-2 pb-sm-4 pb-lg-0 pr-0">
+                        </div>
+                        <div class="col-sm-6 pl-0">
+                            <p class="text-right">
+                                <button type="submit" class="btn btn-space btn-primary">Submit</button>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,23 @@
+﻿@model Booksite.Models.Book
+@{
+    ViewBag.Title = "ProductsDetail";
+    Layout = "/Views/Shared/BookAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12" style="padding: 60px 0 0 300px ;">
+        <h2>Products Detail - @ViewBag.Bookid</h2>
+        <img src="~/Content/images/book/@Model.Book_image" style=" width:200px; height:200px;"/>
+        <ul class="list-unstyled arrow">
+            <li>@Model.Book_name</li>
+            <li>@Model.Description</li>
+            <li>@Model.Category_name</li>
+            <li>@Model.Publisher_name</li>
+            <li>@Model.Supplier_name</li>
+            <li>@Model.Author_name</li>
+            <li>@Model.Original_Price</li>
+            <li>@Model.Discount</li>
+            <li>@Model.Sale_price</li>
+        </ul>
+    </div>
+</div>

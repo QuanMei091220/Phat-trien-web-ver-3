@@ -1,0 +1,83 @@
+﻿@model List<Booksite.Models.ItemCart>
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "/Views/Shared/_LayoutDetails.cshtml";
+}
+
+<div class="check-out">
+    <div class="container">
+        <div class="spec ">
+            <h3>Cart</h3>
+            <h2>Your sessionId  @ViewBag.yourSessionId</h2>
+            <div class="ser-t">
+                <b></b>
+                <span><i></i></span>
+                <b class="line"></b>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function (c) {
+                $('.close1').on('click', function (c) {
+                    $('.cross').fadeOut('slow', function (c) {
+                        $('.cross').remove();
+                    });
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function (c) {
+                $('.close2').on('click', function (c) {
+                    $('.cross1').fadeOut('slow', function (c) {
+                        $('.cross1').remove();
+                    });
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function (c) {
+                $('.close3').on('click', function (c) {
+                    $('.cross2').fadeOut('slow', function (c) {
+                        $('.cross2').remove();
+                    });
+                });
+            });
+        </script>
+        <table class="table ">
+            <tbody>
+                <tr>
+                    <th class="t-head head-it ">Products</th>
+                    <th class="t-head">Price</th>
+                    <th class="t-head">Quantity</th>
+                    <th class="t-head">Total</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+            <tr class="cross">
+                <td class="ring-in t-data">
+                    <a href="single.html" class="at-in">
+                        <img src="~/Content/images/book/@item.Book.Book_image" class="img-responsive" alt="" style="width:120px; height:150px">
+                    </a>
+                    <div class="sed">
+                        <h5>@item.Book.Book_name</h5>
+                    </div>
+                    <div class="clearfix"> </div>
+                    <div class="close1"> <i class="fa fa-times" aria-hidden="true"></i></div>
+                </td>
+                <td class="t-data">@item.Book.Sale_price</td>
+                <td class="product-quantity">
+                    <div class="quantity buttons_added">
+                        <input type="number" size="4" class="input-text qty text"
+                               title="Qty" value="@item.Quantity"
+                               min="0" step="1">
+                    </div>
+                </td>
+                <td class="t-data">@item.LineTotal</td>
+            </tr>
+                }
+                </tbody>
+        </table>
+        <p class="text-right">
+            <a href="~/Checkout/Index"><button type="submit" class="btn btn-space btn-primary">Checkout</button></a>
+</p>
+    </div>
+</div>

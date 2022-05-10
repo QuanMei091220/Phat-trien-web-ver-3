@@ -1,0 +1,47 @@
+﻿@model Booksite.Models.Check_out
+@{
+    ViewBag.Title = "Check out";
+    Layout = "/Views/Shared/_LayoutDetails.cshtml";
+}
+
+<div class="login">
+    <div class="main-agileits">
+        <div class="form-w3agile form1">
+            <h3>Check out</h3>
+            @using (Html.BeginForm("Checkout", "Checkout", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <form action="#" method="post">
+            @*@Html.HiddenFor(m => m.ID, new { @class = "form-control" }) <br>*@
+            <div class="key">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                @Html.LabelFor(m => m.ID)
+                @Html.TextBoxFor(m => m.ID, new { @class = "form-control", @placeholder = "ID" }) <br>
+                <div class="clearfix"></div>
+            </div>
+            <div class="key">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                @Html.LabelFor(m => m.Account_name)
+                @Html.TextBoxFor(m => m.Account_name, new { @class = "form-control", @placeholder = "Account name" }) <br>
+                <div class="clearfix"></div>
+            </div>
+            <div class="key">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+                @Html.LabelFor(m => m.Address)
+                @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" }) <br>
+                <div class="clearfix"></div>
+            </div>
+            <div class="key">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+                @Html.LabelFor(m => m.PhoneNumber)
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "Phone number" }) <br>
+                <div class="clearfix"></div>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+            }
+        </div>
+
+    </div>
+</div>
